@@ -39,6 +39,9 @@ public class AutoPlay implements ApplicationRunner {
             int randomStartingValue = r.nextInt((max - min) + 1) + min;
             System.out.println(playerName + ": Sending "+ randomStartingValue + " to " + opponentName);
             sender.publishTurn(randomStartingValue);
+        } else {
+            System.out.println("Please choose a starting value for the game:");
+            System.out.println("POST http://localhost:"+ env.getProperty("server.port") + "/start?startingValue=<STARTING_VALUE>");
         }
     }
 
@@ -70,7 +73,7 @@ public class AutoPlay implements ApplicationRunner {
             }
         } else {
             System.out.println("Please choose from {-1, 0, 1} and send request as:");
-            System.out.println("http://localhost:"+ env.getProperty("server.port") + "/play?value=" + value + "&choice=[-1|0|1]");
+            System.out.println("POST http://localhost:"+ env.getProperty("server.port") + "/play?value=" + value + "&choice=[-1|0|1]");
         }
     }
 }
