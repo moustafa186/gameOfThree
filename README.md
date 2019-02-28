@@ -90,7 +90,7 @@ curl -i -X POST \
 
 ## III. Both Modes
 
-- when auto player receives win message
+- when player receives win message
 -> it should show "You LOSE!" message
 
 # Future work
@@ -100,3 +100,4 @@ curl -i -X POST \
     or
     - add dead-letter queues to handle if one players is not available at the beginning of the game or if some connectivity failure happened during the game.
 - dockerize app (multi-stage Dockerfile) and provide docker-compose file for easy startup.
+- ManualPlayService can be extracted from ManualPlayController for more modularity and testability.
