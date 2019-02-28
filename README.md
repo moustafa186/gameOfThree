@@ -54,6 +54,49 @@ curl -i -X POST \
 ```
 - Output will be logged to console
 
+
+# Testing
+- Embedded in-memory broker is used to mock rabbitMQ
+- Test scenarios (Work In Progress)
+
+## I. Auto Mode
+
+- when auto player receives start message
+-> it should play first turn
+
+- when auto player receives turn message (with result not winning)
+-> it should make the right choice
+-> publish turn message to opponent
+
+- when auto player receives turn message (with result winning)
+-> it should make the right choice
+-> it should show "You WIN!" message
+-> it should publish win message
+
+## II. Manual Mode
+
+- when human player sends a start request
+-> a turn message should be sent to opponent
+
+- when human player sends a play request with valid choice and result is not win
+-> a turn message should be sent to opponent
+
+- when human player sends a play request with valid choice and result is a win
+-> it should show "You WIN!" message
+-> a win message should be sent to opponent
+
+- when human player sends a play request with invalid choice
+-> response status should be 400: BAD_REQUEST
+
+## III. Both Modes
+
+- when auto player receives win message
+-> it should show "You LOSE!" message
+
 # Future work
-- add dead-letter queues to handle if one players is not available at the begining of the game or if some connectivity failure happened during the game.
+- handle offline player at the game start:
+    - implement exponential back-off retry strategy
+    
+    or
+    - add dead-letter queues to handle if one players is not available at the beginning of the game or if some connectivity failure happened during the game.
 - dockerize app (multi-stage Dockerfile) and provide docker-compose file for easy startup.
