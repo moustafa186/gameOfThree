@@ -90,7 +90,7 @@ curl -i -X POST \
 
 ## III. Both Modes
 
-- when auto player receives win message
+- when player receives win message
 -> it should show "You LOSE!" message
 
 # Future work
